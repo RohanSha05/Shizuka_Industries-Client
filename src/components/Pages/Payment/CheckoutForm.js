@@ -15,19 +15,22 @@ const CheckoutForm = ({ order }) => {
     const price = totalPrice;
     useEffect(() => {
         if (price) {
-            fetch('shizuka-industries-server-rohans-projects-4dad61e9.vercel.app/create-payment-intent', {
-                method: 'POST',
-                headers: {
-                    'content-type': 'application/json'
-                },
-                body: JSON.stringify({ price })
-            })
-                .then(res => res.json())
-                .then(data => {
-                    if (data?.clientSecret) {
-                        setClientSecret(data.clientSecret);
-                    }
-                })
+            fetch(
+							"https://shizuka-industries-server-rohans-projects-4dad61e9.vercel.app//create-payment-intent",
+							{
+								method: "POST",
+								headers: {
+									"content-type": "application/json",
+								},
+								body: JSON.stringify({ price }),
+							}
+						)
+							.then((res) => res.json())
+							.then((data) => {
+								if (data?.clientSecret) {
+									setClientSecret(data.clientSecret);
+								}
+							});
         }
 
     }, [price])
@@ -82,17 +85,21 @@ const CheckoutForm = ({ order }) => {
                 order: _id,
                 transactionId: paymentIntent.id
             }
-            fetch(`shizuka-industries-server-rohans-projects-4dad61e9.vercel.app/order/${_id}`, {
-                method: 'PATCH',
-                headers: {
-                    'content-type': 'application/json'
-                },
-                body: JSON.stringify(payment)
-            }).then(res => res.json())
-                .then(data => {
-                    console.log(data);
-                    setProcessing(false)
-                })
+            fetch(
+							`https://shizuka-industries-server-rohans-projects-4dad61e9.vercel.app//order/${_id}`,
+							{
+								method: "PATCH",
+								headers: {
+									"content-type": "application/json",
+								},
+								body: JSON.stringify(payment),
+							}
+						)
+							.then((res) => res.json())
+							.then((data) => {
+								console.log(data);
+								setProcessing(false);
+							});
 
         }
     }

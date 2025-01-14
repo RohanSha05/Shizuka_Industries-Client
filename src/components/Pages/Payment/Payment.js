@@ -9,7 +9,7 @@ const stripePromise = loadStripe('pk_test_51L36GvHVV2lkEzs1DNuLtFyDE5w9FSEo4RxXl
 
 const Payment = () => {
     const { id } = useParams();
-    const url = `shizuka-industries-server-rohans-projects-4dad61e9.vercel.app/order/${id}`;
+    const url = `https://shizuka-industries-server-rohans-projects-4dad61e9.vercel.app//order/${id}`;
 
     const [order, setOrder] = useState([]);
 

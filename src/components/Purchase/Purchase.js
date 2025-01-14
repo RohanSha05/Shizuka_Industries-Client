@@ -15,7 +15,7 @@ const Purchase = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        const url = `shizuka-industries-server-rohans-projects-4dad61e9.vercel.app/part/${partId}`;
+        const url = `https://shizuka-industries-server-rohans-projects-4dad61e9.vercel.app//part/${partId}`;
 
         fetch(url)
             .then(res => res.json())
@@ -48,17 +48,20 @@ const Purchase = () => {
             image: img
         }
 
-        fetch('shizuka-industries-server-rohans-projects-4dad61e9.vercel.app/order', {
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(order)
-        })
-            .then(res => res.json())
-            .then(data => {
-                toast('Order Delivered Successfully', data)
-            })
+        fetch(
+					"https://shizuka-industries-server-rohans-projects-4dad61e9.vercel.app//order",
+					{
+						method: "POST",
+						headers: {
+							"content-type": "application/json",
+						},
+						body: JSON.stringify(order),
+					}
+				)
+					.then((res) => res.json())
+					.then((data) => {
+						toast("Order Delivered Successfully", data);
+					});
 
         // console.log(order);
     };

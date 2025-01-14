@@ -12,29 +12,34 @@ const MyOrders = () => {
 
     useEffect(() => {
         if (user) {
-            fetch(`shizuka-industries-server-rohans-projects-4dad61e9.vercel.app/order?customerEmail=${user.email}`, {
-                method: 'GET',
-                headers: {
-                    'authorization': `Bearer ${localStorage.getItem('accessToken')}`
-                }
-            })
-                .then(res => {
-                    console.log('res', res)
-                    if (res.status === 401 || res.status === 403) {
-                        signOut(auth);
-                        localStorage.removeItem('accessToken');
-                        navigate('/');
-                    }
-                    return res.json()
-                })
-                .then(data => {
-                    setOrders(data)
-                })
+            fetch(
+							`https://shizuka-industries-server-rohans-projects-4dad61e9.vercel.app//order?customerEmail=${user.email}`,
+							{
+								method: "GET",
+								headers: {
+									authorization: `Bearer ${localStorage.getItem(
+										"accessToken"
+									)}`,
+								},
+							}
+						)
+							.then((res) => {
+								console.log("res", res);
+								if (res.status === 401 || res.status === 403) {
+									signOut(auth);
+									localStorage.removeItem("accessToken");
+									navigate("/");
+								}
+								return res.json();
+							})
+							.then((data) => {
+								setOrders(data);
+							});
         }
     }, [user])
 
     const handleDeleteOrder = id => {
-        const url = `shizuka-industries-server-rohans-projects-4dad61e9.vercel.app/order/${id}`
+        const url = `https://shizuka-industries-server-rohans-projects-4dad61e9.vercel.app//order/${id}`;
         fetch(url, {
             method: 'DELETE'
         })
